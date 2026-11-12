@@ -1,0 +1,722 @@
+/* ==========================================================================
+   OPCODE – Open Platform Community of Design Engineers
+   Simple, Neat, Minimal & Premium Dark Navy Theme
+   Interactive 3-Image PCB Gallery with Realistic Travelling Electric Sparks
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Design Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  /* Deep Navy & Slate Blue Palette */
+  --bg-main: #101E30;
+  --bg-navy-deep: #0D1A28;
+  --bg-section: #1B3047;
+  --bg-card: #29445C;
+  --bg-header: rgba(13, 26, 40, 0.94);
+
+  /* Cyan Accents */
+  --accent-cyan: #36C6D8;
+  --accent-cyan-bright: #4DD9EA;
+  --accent-blue-soft: #7EC8E3;
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-cyan-subtle: rgba(54, 198, 216, 0.28);
+
+  /* Typography Colors */
+  --text-white: #F1F5F9;
+  --text-slate: #B8C7D9;
+  --text-muted: #9BB5CC;
+  --text-dim: #7A99B5;
+
+  /* Fonts */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Transitions */
+  --transition-fast: 0.18s ease;
+  --transition-normal: 0.25s ease;
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Brand Logo Sizing (Easily configured in one central spot) */
+  --logo-height-desktop: 74px;
+  --logo-height-tablet: 58px;
+  --logo-height-mobile: 48px;
+}
+
+/* --------------------------------------------------------------------------
+   Reset & Base Styles
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--bg-main);
+  color: var(--text-slate);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: linear-gradient(160deg, #101E30 0%, #0D1A28 60%, #0a1520 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   Header & Navigation
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-header);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: border-color var(--transition-normal), background-color var(--transition-normal);
+}
+
+.site-header.scrolled {
+  border-bottom-color: rgba(54, 198, 216, 0.15);
+  background: rgba(10, 20, 32, 0.97);
+}
+
+.header-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0.65rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* Logo: Prominent, large display preserving exact original proportions */
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  outline: none;
+  flex-shrink: 0;
+}
+
+.header-logo {
+  height: var(--logo-height-desktop);
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+  transition: opacity var(--transition-fast), filter var(--transition-fast);
+}
+
+.header-logo:hover {
+  opacity: 0.95;
+  filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.35));
+}
+
+.logo-link:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Desktop Navigation: Single clean horizontal row */
+.main-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 2.25rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--text-slate);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 0.4rem 0;
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent-cyan);
+  transition: width var(--transition-normal);
+  border-radius: 1px;
+}
+
+.nav-link:hover {
+  color: var(--text-white);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: var(--text-white);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Mobile Hamburger Button */
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 0.5rem;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  transition: border-color var(--transition-fast);
+}
+
+.mobile-menu-btn:hover {
+  border-color: var(--accent-cyan);
+}
+
+.mobile-menu-btn:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+.hamburger-bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: var(--text-white);
+  transition: transform var(--transition-normal), opacity var(--transition-normal);
+  border-radius: 2px;
+}
+
+.mobile-menu-btn.open .hamburger-bar:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.mobile-menu-btn.open .hamburger-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.open .hamburger-bar:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* Mobile Navigation Drawer */
+.mobile-nav {
+  display: none;
+  background: rgba(13, 26, 40, 0.99);
+  border-bottom: 1px solid var(--border-subtle);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 1.25rem 2rem 1.75rem;
+}
+
+.mobile-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.mobile-nav-link {
+  color: var(--text-slate);
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 500;
+  display: block;
+  padding: 0.35rem 0;
+  transition: color var(--transition-fast);
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  color: var(--accent-cyan);
+}
+
+/* --------------------------------------------------------------------------
+   Hero Section: Clean Two-Column Layout
+   -------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  min-height: calc(100vh - 84px);
+  display: flex;
+  align-items: center;
+  padding: 4.5rem 3rem 6rem;
+  background: linear-gradient(145deg, #101E30 0%, #152840 45%, #1B3047 100%);
+}
+
+.hero-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.02fr 1fr;
+  gap: 4.5rem;
+  align-items: center;
+}
+
+/* Left Column: Editorial & Info (Preserved) */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.hero-welcome {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-blue-soft);
+  display: inline-block;
+}
+
+.hero-heading {
+  font-size: clamp(2.35rem, 3.6vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  color: var(--text-white);
+}
+
+.cyan-accent {
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+.hero-org-name {
+  font-size: clamp(1.05rem, 1.25vw, 1.1875rem);
+  font-weight: 600;
+  color: var(--text-slate);
+  letter-spacing: 0.01em;
+  line-height: 1.45;
+}
+
+.hero-intro {
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.72;
+  color: var(--text-muted);
+  max-width: 560px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* --------------------------------------------------------------------------
+   Right Column: Interactive 3-Image PCB Gallery
+   -------------------------------------------------------------------------- */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.pcb-gallery-container {
+  width: 100%;
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  perspective: 1100px;
+}
+
+/* Featured Large PCB Frame (Supports Interactive 3D Perspective Tilt) */
+.pcb-featured-frame {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(54, 198, 216, 0.18);
+  background: #1B3047;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(54, 198, 216, 0.06);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  will-change: transform, box-shadow;
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.pcb-featured-frame:hover {
+  border-color: rgba(54, 198, 216, 0.38);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(54, 198, 216, 0.14);
+}
+
+.pcb-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: #0f1e2e;
+}
+
+/* Featured Photograph with Smooth Crossfade */
+.pcb-photograph {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  transition: opacity var(--transition-smooth), transform 0.4s ease;
+}
+
+.pcb-photograph.fade-out {
+  opacity: 0.15;
+  transform: scale(0.99);
+}
+
+/* SVG Overlays - Synchronously mapped for each PCB */
+.pcb-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-smooth), visibility var(--transition-smooth);
+}
+
+.pcb-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* --------------------------------------------------------------------------
+   REALISTIC ELECTRIC CURRENT & SPARK ANIMATIONS
+   - Layer 1: Circuit track brightening wave (illuminates copper as spark passes)
+   - Layer 2: Glowing cyan light trail behind each spark
+   - Layer 3: Concentrated white electric spark head
+   - Layer 4: Occasional small electrical sparks at circuit junctions
+   -------------------------------------------------------------------------- */
+
+/* Layer 1: Circuit Track Brightening Wave (Req 5) */
+.spark-wave {
+  stroke-dasharray: 85 700;
+  stroke-dashoffset: 85;
+  opacity: 0;
+  will-change: stroke-dashoffset, opacity;
+}
+
+/* Layer 2: Glowing Light Trail (Req 6) */
+.spark-trail {
+  stroke-dasharray: 45 740;
+  stroke-dashoffset: 85;
+  opacity: 0;
+  will-change: stroke-dashoffset, opacity;
+}
+
+/* Layer 3: Concentrated White Spark Core Head (Req 1, 2, 7) */
+.spark-head {
+  stroke-dasharray: 14 771;
+  stroke-dashoffset: 85;
+  opacity: 0;
+  will-change: stroke-dashoffset, opacity;
+}
+
+/* Forward Travelling Sparks (Outward along circuit tracks) */
+@keyframes sparkFlowOut {
+  0% {
+    stroke-dashoffset: 85;
+    opacity: 0;
+  }
+  6% {
+    opacity: 0.95;
+  }
+  80% {
+    opacity: 0.95;
+  }
+  100% {
+    stroke-dashoffset: -560;
+    opacity: 0;
+  }
+}
+
+/* Reverse Travelling Sparks (Inward signals into chips) */
+@keyframes sparkFlowIn {
+  0% {
+    stroke-dashoffset: -560;
+    opacity: 0;
+  }
+  6% {
+    opacity: 0.95;
+  }
+  80% {
+    opacity: 0.95;
+  }
+  100% {
+    stroke-dashoffset: 85;
+    opacity: 0;
+  }
+}
+
+/* Staggered Independent Speeds & Delays across 10 Circuit Paths (Req 3, 4, 8) */
+.s1 { animation: sparkFlowOut 2.4s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; animation-delay: -0.4s; }
+.s2 { animation: sparkFlowOut 2.8s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; animation-delay: -1.6s; }
+.s3 { animation: sparkFlowOut 3.1s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; animation-delay: -0.8s; }
+.s4 { animation: sparkFlowOut 2.5s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; animation-delay: -2.0s; }
+.s5-rev { animation: sparkFlowIn 2.7s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; animation-delay: -0.3s; }
+.s6 { animation: sparkFlowOut 2.2s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; animation-delay: -1.2s; }
+.s7 { animation: sparkFlowOut 3.3s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; animation-delay: -1.9s; }
+.s8 { animation: sparkFlowOut 2.9s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; animation-delay: -0.6s; }
+.s9 { animation: sparkFlowOut 2.6s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; animation-delay: -1.4s; }
+.s10-rev { animation: sparkFlowIn 3.0s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; animation-delay: -2.3s; }
+
+/* Layer 4: Occasional Electrical Sparks at Selected Circuit Junctions (Req 9) */
+.junction-spark {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+@keyframes junctionArcFlash {
+  0%, 78%, 100% {
+    opacity: 0;
+    transform: scale(0.2) rotate(0deg);
+  }
+  80% {
+    opacity: 0.95;
+    transform: scale(1.4) rotate(15deg);
+    filter: drop-shadow(0 0 6px #00f0ff) drop-shadow(0 0 2px #ffffff);
+  }
+  83% {
+    opacity: 0.35;
+    transform: scale(0.7) rotate(30deg);
+  }
+  86% {
+    opacity: 1;
+    transform: scale(1.6) rotate(45deg);
+    filter: drop-shadow(0 0 8px #00f0ff);
+  }
+  90% {
+    opacity: 0;
+    transform: scale(0.3) rotate(60deg);
+  }
+}
+
+.js-1 { animation: junctionArcFlash 3.2s ease-in-out infinite -0.6s; }
+.js-2 { animation: junctionArcFlash 4.1s ease-in-out infinite -2.1s; }
+.js-3 { animation: junctionArcFlash 2.9s ease-in-out infinite -1.3s; }
+.js-4 { animation: junctionArcFlash 4.8s ease-in-out infinite -3.4s; }
+.js-5 { animation: junctionArcFlash 3.7s ease-in-out infinite -0.9s; }
+.js-6 { animation: junctionArcFlash 5.2s ease-in-out infinite -2.7s; }
+
+/* --------------------------------------------------------------------------
+   Horizontal Row of Three Small Image Thumbnails (Clean & Image-Only)
+   -------------------------------------------------------------------------- */
+.pcb-thumbnails-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  width: 100%;
+}
+
+.pcb-thumbnail {
+  background: rgba(27, 48, 71, 0.9);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 4px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  outline: none;
+  transition: border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.thumb-media {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  background-color: #0f1e2e;
+}
+
+.thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.8);
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.pcb-thumbnail:hover {
+  border-color: rgba(0, 240, 255, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+.pcb-thumbnail:hover .thumb-img {
+  filter: brightness(1.02);
+  transform: scale(1.03);
+}
+
+/* Selected Thumbnail Highlighted with Thin Cyan Border */
+.pcb-thumbnail.active {
+  border-color: var(--accent-cyan-bright);
+  box-shadow: 0 0 16px rgba(54, 198, 216, 0.35), inset 0 0 6px rgba(54, 198, 216, 0.1);
+  background: rgba(54, 198, 216, 0.06);
+}
+
+.pcb-thumbnail.active .thumb-img {
+  filter: brightness(1.08);
+}
+
+.pcb-thumbnail:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility: Prefers-Reduced-Motion Support
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .spark-wave,
+  .spark-trail,
+  .spark-head,
+  .junction-spark,
+  .s1, .s2, .s3, .s4, .s5-rev, .s6, .s7, .s8, .s9, .s10-rev,
+  .js-1, .js-2, .js-3, .js-4, .js-5, .js-6 {
+    animation: none !important;
+  }
+
+  .spark-trail {
+    stroke-dashoffset: 0;
+    opacity: 0.45;
+  }
+
+  .spark-head {
+    stroke-dashoffset: 0;
+    opacity: 0.6;
+  }
+
+  .junction-spark {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Design Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .header-container {
+    padding: 0.85rem 2rem;
+  }
+
+  .hero-section {
+    padding: 3.5rem 2rem 5rem;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+
+  .hero-content {
+    max-width: 680px;
+  }
+
+  .pcb-gallery-container {
+    max-width: 680px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0.65rem 1.5rem;
+  }
+
+  .header-logo {
+    height: var(--logo-height-tablet);
+  }
+
+  .main-nav {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .mobile-nav {
+    display: block;
+  }
+
+  .hero-section {
+    padding: 2.5rem 1.5rem 4.5rem;
+  }
+
+  .hero-heading {
+    font-size: clamp(2rem, 6.5vw, 2.5rem);
+  }
+
+  .hero-org-name {
+    font-size: 1rem;
+  }
+
+  .hero-intro {
+    font-size: 0.9875rem;
+  }
+
+  .pcb-thumbnails-row {
+    gap: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-container {
+    padding: 0.6rem 1rem;
+  }
+
+  .header-logo {
+    height: var(--logo-height-mobile);
+  }
+
+  .hero-section {
+    padding: 2rem 1rem 3.5rem;
+  }
+
+  .hero-heading {
+    font-size: 1.85rem;
+  }
+
+  .pcb-thumbnail {
+    padding: 3px;
+    border-radius: 8px;
+  }
+}
