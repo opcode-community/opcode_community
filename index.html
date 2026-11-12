@@ -1,477 +1,461 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OPCODE | Open Platform Community of Design Engineers</title>
-  <meta name="description" content="OPCODE is an engineering community connecting students, professionals and industry experts.">
-
+  <title>OPCODE – Open Platform Community of Design Engineers</title>
+  <meta name="description" content="OPCODE is an engineering community connecting students, professionals, and industry experts. Where Ideas Get Their Instructions to Innovate.">
+  
+  <!-- Preconnect to Google Fonts: Inter font family -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #050a12;
-      color: #f4f7fb;
-      overflow-x: hidden;
-    }
-
-    .site-header {
-      width: 100%;
-      height: 88px;
-      background: rgba(5, 10, 18, 0.96);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      align-items: center;
-      position: relative;
-      z-index: 10;
-    }
-
-    .header-container {
-      width: min(1240px, 92%);
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo-link img {
-      width: 190px;
-      height: auto;
-      display: block;
-      object-fit: contain;
-    }
-
-    .nav-list {
-      display: flex;
-      list-style: none;
-      gap: 36px;
-    }
-
-    .nav-list a {
-      color: #d5deea;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
-    .nav-list a:hover,
-    .nav-list a.active {
-      color: #25d9f4;
-    }
-
-    .menu-button {
-      display: none;
-      background: none;
-      border: 0;
-      color: white;
-      font-size: 28px;
-      cursor: pointer;
-    }
-
-    .hero-section {
-      min-height: calc(100vh - 88px);
-      display: flex;
-      align-items: center;
-      padding: 65px 0;
-      position: relative;
-      background:
-        radial-gradient(ellipse at 80% 50%, rgba(0, 174, 210, 0.08), transparent 55%),
-        #050a12;
-    }
-
-    .hero-container {
-      width: min(1240px, 92%);
-      margin: auto;
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 55px;
-      align-items: center;
-    }
-
-    .hero-welcome {
-      color: #25d9f4;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 22px;
-    }
-
-    .hero-heading {
-      font-size: clamp(36px, 4.3vw, 58px);
-      line-height: 1.17;
-      letter-spacing: -2px;
-      font-weight: 800;
-      margin-bottom: 25px;
-    }
-
-    .cyan-accent {
-      color: #28d9f4;
-    }
-
-    .hero-org-name {
-      font-size: 16px;
-      color: #d8e2ee;
-      font-weight: 600;
-      line-height: 1.6;
-      margin-bottom: 18px;
-    }
-
-    .hero-intro {
-      color: #9eacbd;
-      font-size: 15px;
-      line-height: 1.9;
-      max-width: 510px;
-    }
-
-    .pcb-gallery-container {
-      width: 100%;
-    }
-
-    .pcb-featured-frame {
-      position: relative;
-      padding: 9px;
-      border: 1px solid rgba(40, 217, 244, 0.3);
-      border-radius: 13px;
-      background: #0a1420;
-      box-shadow: 0 20px 65px rgba(0,0,0,0.45);
-    }
-
-    .pcb-viewport {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 736 / 460;
-      overflow: hidden;
-      border-radius: 7px;
-      background: #07111c;
-    }
-
-    .pcb-photograph {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      transition: opacity 0.35s ease;
-    }
-
-    .current-overlay {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-
-    .current-track {
-      fill: none;
-      stroke: #00eaff;
-      stroke-width: 3;
-      stroke-linecap: round;
-      stroke-dasharray: 12 75;
-      animation: currentFlow 2.4s linear infinite;
-      filter: drop-shadow(0 0 4px #00eaff)
-              drop-shadow(0 0 9px rgba(0,234,255,0.8));
-    }
-
-    .current-track.secondary {
-      stroke: #ffffff;
-      stroke-width: 1.4;
-      stroke-dasharray: 3 95;
-      animation-duration: 3.1s;
-    }
-
-    .current-track.reverse {
-      animation-direction: reverse;
-      animation-duration: 3.5s;
-    }
-
-    @keyframes currentFlow {
-      to {
-        stroke-dashoffset: -174;
-      }
-    }
-
-    .pcb-thumbnails-row {
-      display: flex;
-      gap: 14px;
-      margin-top: 17px;
-    }
-
-    .pcb-thumbnail {
-      flex: 1;
-      height: 85px;
-      padding: 4px;
-      overflow: hidden;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.13);
-      background: #101c29;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
-
-    .pcb-thumbnail:hover,
-    .pcb-thumbnail.active {
-      border-color: #25d9f4;
-      transform: translateY(-3px);
-    }
-
-    .pcb-thumbnail img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-
-    @media (max-width: 900px) {
-      .hero-container {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .hero-content {
-        text-align: center;
-      }
-
-      .hero-intro {
-        margin: auto;
-      }
-    }
-
-    @media (max-width: 650px) {
-      .site-header {
-        height: 72px;
-      }
-
-      .logo-link img {
-        width: 155px;
-      }
-
-      .menu-button {
-        display: block;
-      }
-
-      .nav-list {
-        display: none;
-        position: absolute;
-        top: 72px;
-        left: 0;
-        width: 100%;
-        background: #08111d;
-        flex-direction: column;
-        gap: 0;
-        padding: 12px 5%;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-      }
-
-      .nav-list.open {
-        display: flex;
-      }
-
-      .nav-list li a {
-        display: block;
-        padding: 15px 0;
-      }
-
-      .hero-section {
-        padding: 55px 0;
-      }
-
-      .hero-heading {
-        font-size: 37px;
-        letter-spacing: -1px;
-      }
-
-      .pcb-thumbnail {
-        height: 65px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-
-  <header class="site-header">
+  <!-- Header Navigation -->
+  <header class="site-header" id="header">
     <div class="header-container">
-
-      <a href="#home" class="logo-link" aria-label="OPCODE Home">
-        <img src="./opcode-logo-new.png" alt="OPCODE Logo">
+      <!-- Brand Logo (Easily replaceable by updating src) -->
+      <a href="#home" class="logo-link" aria-label="OPCODE Homepage">
+        <img src="assets/opcode-logo-new.png" 
+             alt="OPCODE – Open Platform Community of Design Engineers" 
+             class="header-logo" 
+             width="2172" 
+             height="724"
+             loading="eager"
+             onerror="if(!this.dataset.retry){this.dataset.retry='1';this.src='opcode-logo-new.png';}else if(this.dataset.retry==='1'){this.dataset.retry='2';this.src='assests/opcode-logo-new.png';}">
       </a>
 
-      <button class="menu-button" id="menuButton"
-              aria-label="Toggle menu" aria-expanded="false">
-        ☰
-      </button>
-
-      <nav>
-        <ul class="nav-list" id="navList">
-          <li><a href="#home" class="active">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="#course">Course</a></li>
-          <li><a href="#core-team">Core Team</a></li>
-          <li><a href="#contact-us">Contact Us</a></li>
+      <!-- Desktop Navigation (Clean single horizontal row) -->
+      <nav class="main-nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+          <li class="nav-item"><a href="#course" class="nav-link">Course</a></li>
+          <li class="nav-item"><a href="#core-team" class="nav-link">Core Team</a></li>
+          <li class="nav-item"><a href="#contact-us" class="nav-link">Contact Us</a></li>
         </ul>
       </nav>
 
+      <!-- Mobile Hamburger Toggle -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileNav">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
     </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile Navigation" hidden>
+      <ul class="mobile-nav-list">
+        <li><a href="#home" class="mobile-nav-link active">Home</a></li>
+        <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+        <li><a href="#course" class="mobile-nav-link">Course</a></li>
+        <li><a href="#core-team" class="mobile-nav-link">Core Team</a></li>
+        <li><a href="#contact-us" class="mobile-nav-link">Contact Us</a></li>
+      </ul>
+    </nav>
   </header>
 
+  <!-- Clean Two-Column Hero Section -->
   <main class="hero-section" id="home">
     <div class="hero-container">
-
-      <section class="hero-content">
-
+      <!-- Left Column: Editorial & Community Information (Preserved exactly as requested) -->
+      <div class="hero-content">
+        <!-- Welcome Tag -->
         <div class="hero-welcome">Welcome to OPCODE</div>
 
+        <!-- Main Headline -->
         <h1 class="hero-heading">
-          Where Ideas Get Their
-          <span class="cyan-accent">Instructions to Innovate.</span>
+          Where Ideas Get Their <span class="cyan-accent">Instructions to Innovate.</span>
         </h1>
 
+        <!-- Organization Name -->
         <div class="hero-org-name">
           OPCODE – Open Platform Community of Design Engineers
         </div>
 
+        <!-- Short Introduction -->
         <p class="hero-intro">
-          OPCODE is an engineering community connecting students,
-          professionals, and industry experts. Together, we collaborate,
-          share knowledge, gain practical experience, and transform
-          engineering ideas into real-world solutions.
+          OPCODE is an engineering community connecting students, professionals, and industry experts. Together, we collaborate, share hardware architecture insights, and engineer next-generation solutions from silicon design to embedded systems.
         </p>
+      </div>
 
-      </section>
-
-      <section class="hero-visual" aria-label="PCB Design Gallery">
-
+      <!-- Right Column: Interactive 3-Image PCB Gallery with Electric Sparks -->
+      <div class="hero-visual">
         <div class="pcb-gallery-container">
-
+          <!-- Featured Large PCB Stage -->
           <div class="pcb-featured-frame">
-            <div class="pcb-viewport">
+            <div class="pcb-viewport" id="pcbViewport">
+              <!-- Featured PCB Photograph with Smooth Crossfade -->
+              <img src="assets/pcb-1.jpg" alt="Featured PCB Circuit Architecture" id="featuredPcbImage" class="pcb-photograph" width="736" height="460">
 
-              <img
-                src="./pcb-1.jpg"
-                alt="PCB circuit design"
-                id="featuredPcbImage"
-                class="pcb-photograph"
-              >
+              <!-- ============================================================
+                   OVERLAY 1: Mapped specifically for assets/pcb-1.jpg
+                   ============================================================ -->
+              <svg class="pcb-circuit-svg pcb-overlay active" id="overlay-pcb-1" viewBox="0 0 736 460" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                  <filter id="sparkGlow1" x="-40%" y="-40%" width="180%" height="180%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="2.4" result="blur1" />
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="1.0" result="blur2" />
+                    <feMerge>
+                      <feMergeNode in="blur1" />
+                      <feMergeNode in="blur2" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                  <filter id="junctionFlash1" x="-100%" y="-100%" width="300%" height="300%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="2.8" result="jBlur" />
+                    <feMerge>
+                      <feMergeNode in="jBlur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
 
-              <!-- Animated electric current travelling along circuit paths -->
-              <svg class="current-overlay"
-                   viewBox="0 0 736 460"
-                   preserveAspectRatio="none"
-                   aria-hidden="true">
+                  <!-- Trace Paths for PCB 1 -->
+                  <path id="p1-tr-1" d="M 110 220 L 190 260 L 260 230 L 330 265 L 430 315 L 530 365" />
+                  <path id="p1-tr-2" d="M 220 180 L 290 145 L 350 175 L 420 140 L 480 170 L 530 145" />
+                  <path id="p1-tr-3" d="M 250 330 L 320 370 L 380 340 L 440 370 L 490 345" />
+                  <path id="p1-tr-4" d="M 480 270 L 550 305 L 620 340 L 690 375" />
+                  <path id="p1-tr-5" d="M 560 85 L 520 110 L 480 135 L 430 160 L 380 185" />
+                  <path id="p1-tr-6" d="M 130 230 Q 155 210 185 215 T 240 250 L 300 280" />
+                  <path id="p1-tr-7" d="M 440 215 L 440 250 L 490 275 L 540 250" />
+                  <path id="p1-tr-8" d="M 580 140 L 630 165 L 680 140 L 710 155" />
+                  <path id="p1-tr-9" d="M 360 410 L 430 445 L 520 405 L 600 440" />
+                  <path id="p1-tr-10" d="M 170 275 Q 210 250 250 275 T 310 265" />
+                </defs>
 
-                <path class="current-track"
-                  d="M0 100 L100 100 L145 145 L250 145 L310 205 L430 205 L500 275 L736 275"/>
+                <!-- Base Passive Traces -->
+                <g class="passive-traces" stroke="rgba(0, 240, 255, 0.1)" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <use href="#p1-tr-1" /><use href="#p1-tr-2" /><use href="#p1-tr-3" /><use href="#p1-tr-4" /><use href="#p1-tr-5" />
+                  <use href="#p1-tr-6" /><use href="#p1-tr-7" /><use href="#p1-tr-8" /><use href="#p1-tr-9" /><use href="#p1-tr-10" />
+                </g>
 
-                <path class="current-track secondary"
-                  d="M0 350 L130 350 L190 290 L300 290 L360 230 L480 230 L550 160 L736 160"/>
+                <!-- Layer 1: Circuit Track Brightening Wave (underneath travelling sparks) -->
+                <g class="track-waves" fill="none" stroke="rgba(0, 240, 255, 0.42)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+                  <use href="#p1-tr-1" class="spark-wave s1" />
+                  <use href="#p1-tr-2" class="spark-wave s2" />
+                  <use href="#p1-tr-3" class="spark-wave s3" />
+                  <use href="#p1-tr-4" class="spark-wave s4" />
+                  <use href="#p1-tr-5" class="spark-wave s5-rev" />
+                  <use href="#p1-tr-6" class="spark-wave s6" />
+                  <use href="#p1-tr-7" class="spark-wave s7" />
+                  <use href="#p1-tr-8" class="spark-wave s8" />
+                  <use href="#p1-tr-9" class="spark-wave s9" />
+                  <use href="#p1-tr-10" class="spark-wave s10-rev" />
+                </g>
 
-                <path class="current-track reverse"
-                  d="M80 0 L80 90 L150 160 L150 260 L230 340 L230 460"/>
+                <!-- Layer 2: Glowing Cyan Light Trail behind each spark -->
+                <g class="spark-trails" fill="none" stroke="#00e5ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" filter="url(#sparkGlow1)">
+                  <use href="#p1-tr-1" class="spark-trail s1" />
+                  <use href="#p1-tr-2" class="spark-trail s2" />
+                  <use href="#p1-tr-3" class="spark-trail s3" />
+                  <use href="#p1-tr-4" class="spark-trail s4" />
+                  <use href="#p1-tr-5" class="spark-trail s5-rev" />
+                  <use href="#p1-tr-6" class="spark-trail s6" />
+                  <use href="#p1-tr-7" class="spark-trail s7" />
+                  <use href="#p1-tr-8" class="spark-trail s8" />
+                  <use href="#p1-tr-9" class="spark-trail s9" />
+                  <use href="#p1-tr-10" class="spark-trail s10-rev" />
+                </g>
 
-                <path class="current-track secondary reverse"
-                  d="M600 0 L600 90 L530 150 L530 250 L620 340 L620 460"/>
+                <!-- Layer 3: Concentrated White Spark Core Head -->
+                <g class="spark-heads" fill="none" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                  <use href="#p1-tr-1" class="spark-head s1" />
+                  <use href="#p1-tr-2" class="spark-head s2" />
+                  <use href="#p1-tr-3" class="spark-head s3" />
+                  <use href="#p1-tr-4" class="spark-head s4" />
+                  <use href="#p1-tr-5" class="spark-head s5-rev" />
+                  <use href="#p1-tr-6" class="spark-head s6" />
+                  <use href="#p1-tr-7" class="spark-head s7" />
+                  <use href="#p1-tr-8" class="spark-head s8" />
+                  <use href="#p1-tr-9" class="spark-head s9" />
+                  <use href="#p1-tr-10" class="spark-head s10-rev" />
+                </g>
 
-                <path class="current-track"
-                  d="M300 0 L300 65 L360 125 L360 190 L420 250 L420 330 L500 410 L500 460"/>
-
-                <path class="current-track secondary"
-                  d="M0 220 L100 220 L160 170 L230 170 L290 220 L370 220 L430 280 L520 280 L590 350 L736 350"/>
-
+                <!-- Occasional Junction Sparks (Small controlled electrical discharges at circuit nodes) -->
+                <g class="junction-sparks" filter="url(#junctionFlash1)">
+                  <g class="junction-spark js-1" transform="translate(330, 265)">
+                    <circle r="2.2" fill="#ffffff" />
+                    <polygon points="0,-4 1,-1 4,0 1,1 0,4 -1,1 -4,0 -1,-1" fill="#00f0ff" />
+                  </g>
+                  <g class="junction-spark js-2" transform="translate(480, 170)">
+                    <circle r="2.2" fill="#ffffff" />
+                    <polygon points="0,-4 1,-1 4,0 1,1 0,4 -1,1 -4,0 -1,-1" fill="#00f0ff" />
+                  </g>
+                  <g class="junction-spark js-3" transform="translate(440, 250)">
+                    <circle r="2.5" fill="#ffffff" />
+                    <polygon points="0,-4.5 1,-1 4.5,0 1,1 0,4.5 -1,1 -4.5,0 -1,-1" fill="#00f0ff" />
+                  </g>
+                  <g class="junction-spark js-4" transform="translate(550, 305)">
+                    <circle r="2.2" fill="#ffffff" />
+                    <polygon points="0,-4 1,-1 4,0 1,1 0,4 -1,1 -4,0 -1,-1" fill="#00f0ff" />
+                  </g>
+                  <g class="junction-spark js-5" transform="translate(380, 340)">
+                    <circle r="2.2" fill="#ffffff" />
+                    <polygon points="0,-4 1,-1 4,0 1,1 0,4 -1,1 -4,0 -1,-1" fill="#00f0ff" />
+                  </g>
+                </g>
               </svg>
 
+              <!-- ============================================================
+                   OVERLAY 2: Mapped specifically for assets/pcb-2.jpg
+                   ============================================================ -->
+              <svg class="pcb-circuit-svg pcb-overlay" id="overlay-pcb-2" viewBox="0 0 1080 675" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                  <filter id="sparkGlow2" x="-40%" y="-40%" width="180%" height="180%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="2.4" result="blur1" />
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="1.0" result="blur2" />
+                    <feMerge>
+                      <feMergeNode in="blur1" />
+                      <feMergeNode in="blur2" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                  <filter id="junctionFlash2" x="-100%" y="-100%" width="300%" height="300%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="2.8" result="jBlur" />
+                    <feMerge>
+                      <feMergeNode in="jBlur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+
+                  <!-- Trace Paths for PCB 2 (Toroid coils, MOSFETs, and IC pins) -->
+                  <path id="p2-tr-1" d="M 220 520 L 320 460 L 430 400 L 520 350" />
+                  <path id="p2-tr-2" d="M 150 320 L 240 375 L 330 320 L 400 360" />
+                  <path id="p2-tr-3" d="M 420 360 L 530 425 L 640 370 L 740 430" />
+                  <path id="p2-tr-4" d="M 750 210 L 820 250 L 890 295 L 960 340" />
+                  <path id="p2-tr-5" d="M 340 540 L 440 480 L 540 540 L 640 600" />
+                  <path id="p2-tr-6" d="M 140 180 L 230 235 L 320 180 L 410 235" />
+                  <path id="p2-tr-7" d="M 320 280 L 400 330 L 480 280 L 560 330" />
+                  <path id="p2-tr-8" d="M 560 330 L 650 380 L 730 335 L 810 385" />
+                  <path id="p2-tr-9" d="M 480 600 L 570 545 L 670 605 L 770 550" />
+                  <path id="p2-tr-10" d="M 250 440 Q 300 480 360 450 T 480 430" />
+                </defs>
+
+                <!-- Base Passive Traces -->
+                <g class="passive-traces" stroke="rgba(0, 240, 255, 0.1)" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <use href="#p2-tr-1" /><use href="#p2-tr-2" /><use href="#p2-tr-3" /><use href="#p2-tr-4" /><use href="#p2-tr-5" />
+                  <use href="#p2-tr-6" /><use href="#p2-tr-7" /><use href="#p2-tr-8" /><use href="#p2-tr-9" /><use href="#p2-tr-10" />
+                </g>
+
+                <!-- Layer 1: Circuit Track Brightening Wave -->
+                <g class="track-waves" fill="none" stroke="rgba(0, 240, 255, 0.42)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+                  <use href="#p2-tr-1" class="spark-wave s1" />
+                  <use href="#p2-tr-2" class="spark-wave s2" />
+                  <use href="#p2-tr-3" class="spark-wave s3" />
+                  <use href="#p2-tr-4" class="spark-wave s4" />
+                  <use href="#p2-tr-5" class="spark-wave s5-rev" />
+                  <use href="#p2-tr-6" class="spark-wave s6" />
+                  <use href="#p2-tr-7" class="spark-wave s7" />
+                  <use href="#p2-tr-8" class="spark-wave s8" />
+                  <use href="#p2-tr-9" class="spark-wave s9" />
+                  <use href="#p2-tr-10" class="spark-wave s10-rev" />
+                </g>
+
+                <!-- Layer 2: Glowing Light Trail -->
+                <g class="spark-trails" fill="none" stroke="#00e5ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" filter="url(#sparkGlow2)">
+                  <use href="#p2-tr-1" class="spark-trail s1" />
+                  <use href="#p2-tr-2" class="spark-trail s2" />
+                  <use href="#p2-tr-3" class="spark-trail s3" />
+                  <use href="#p2-tr-4" class="spark-trail s4" />
+                  <use href="#p2-tr-5" class="spark-trail s5-rev" />
+                  <use href="#p2-tr-6" class="spark-trail s6" />
+                  <use href="#p2-tr-7" class="spark-trail s7" />
+                  <use href="#p2-tr-8" class="spark-trail s8" />
+                  <use href="#p2-tr-9" class="spark-trail s9" />
+                  <use href="#p2-tr-10" class="spark-trail s10-rev" />
+                </g>
+
+                <!-- Layer 3: Concentrated White Spark Core Head -->
+                <g class="spark-heads" fill="none" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                  <use href="#p2-tr-1" class="spark-head s1" />
+                  <use href="#p2-tr-2" class="spark-head s2" />
+                  <use href="#p2-tr-3" class="spark-head s3" />
+                  <use href="#p2-tr-4" class="spark-head s4" />
+                  <use href="#p2-tr-5" class="spark-head s5-rev" />
+                  <use href="#p2-tr-6" class="spark-head s6" />
+                  <use href="#p2-tr-7" class="spark-head s7" />
+                  <use href="#p2-tr-8" class="spark-head s8" />
+                  <use href="#p2-tr-9" class="spark-head s9" />
+                  <use href="#p2-tr-10" class="spark-head s10-rev" />
+                </g>
+
+                <!-- Occasional Junction Sparks for PCB 2 -->
+                <g class="junction-sparks" filter="url(#junctionFlash2)">
+                  <g class="junction-spark js-1" transform="translate(430, 400)">
+                    <circle r="2.2" fill="#ffffff" />
+                    <polygon points="0,-4 1,-1 4,0 1,1 0,4 -1,1 -4,0 -1,-1" fill="#00f0ff" />
+                  </g>
+                  <g class="junction-spark js-2" transform="translate(530, 425)">
+                    <circle r="2.2" fill="#ffffff" />
+                    <polygon points="0,-4 1,-1 4,0 1,1 0,4 -1,1 -4,0 -1,-1" fill="#00f0ff" />
+                  </g>
+                  <g class="junction-spark js-3" transform="translate(340, 540)">
+                    <circle r="2.5" fill="#ffffff" />
+                    <polygon points="0,-4.5 1,-1 4.5,0 1,1 0,4.5 -1,1 -4.5,0 -1,-1" fill="#00f0ff" />
+                  </g>
+                  <g class="junction-spark js-4" transform="translate(640, 370)">
+                    <circle r="2.2" fill="#ffffff" />
+                    <polygon points="0,-4 1,-1 4,0 1,1 0,4 -1,1 -4,0 -1,-1" fill="#00f0ff" />
+                  </g>
+                  <g class="junction-spark js-5" transform="translate(400, 360)">
+                    <circle r="2.2" fill="#ffffff" />
+                    <polygon points="0,-4 1,-1 4,0 1,1 0,4 -1,1 -4,0 -1,-1" fill="#00f0ff" />
+                  </g>
+                </g>
+              </svg>
+
+              <!-- ============================================================
+                   OVERLAY 3: Mapped specifically for assets/pcb-3.jpg
+                   ============================================================ -->
+              <svg class="pcb-circuit-svg pcb-overlay" id="overlay-pcb-3" viewBox="0 0 1200 750" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                  <filter id="sparkGlow3" x="-40%" y="-40%" width="180%" height="180%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="2.4" result="blur1" />
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="1.0" result="blur2" />
+                    <feMerge>
+                      <feMergeNode in="blur1" />
+                      <feMergeNode in="blur2" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                  <filter id="junctionFlash3" x="-100%" y="-100%" width="300%" height="300%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="2.8" result="jBlur" />
+                    <feMerge>
+                      <feMergeNode in="jBlur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+
+                  <!-- Trace Paths for PCB 3 (Aligned to physical CPU pins, buses, and components) -->
+                  <path id="p3-tr-1" d="M 530 110 L 530 65 L 480 25 L 380 25 L 340 65 L 200 65" />
+                  <path id="p3-tr-2" d="M 650 110 L 650 55 L 700 20 L 820 20 L 870 70 L 980 70" />
+                  <path id="p3-tr-3" d="M 690 170 L 770 170 L 830 110 L 920 110 L 970 160 L 1060 160" />
+                  <path id="p3-tr-4" d="M 550 265 L 550 340 L 480 410 L 380 410 L 320 470 L 320 580 L 260 640 L 180 640" />
+                  <path id="p3-tr-5" d="M 640 265 L 640 340 L 710 410 L 800 410 L 860 470 L 900 470" />
+                  <path id="p3-tr-6" d="M 150 120 L 230 120 L 280 170 L 280 250 L 340 310 L 420 310" />
+                  <path id="p3-tr-7" d="M 690 210 L 780 210 L 840 270 L 960 270 L 1000 270" />
+                  <path id="p3-tr-8" d="M 900 470 L 900 550 L 840 610 L 740 610 L 680 670" />
+                  <path id="p3-tr-9" d="M 440 350 Q 480 390 520 360 T 580 390 L 640 390" />
+                  <path id="p3-tr-10" d="M 585 470 L 585 540 L 630 585 L 630 670" />
+                </defs>
+
+                <!-- Base Passive Traces -->
+                <g class="passive-traces" stroke="rgba(0, 240, 255, 0.1)" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <use href="#p3-tr-1" /><use href="#p3-tr-2" /><use href="#p3-tr-3" /><use href="#p3-tr-4" /><use href="#p3-tr-5" />
+                  <use href="#p3-tr-6" /><use href="#p3-tr-7" /><use href="#p3-tr-8" /><use href="#p3-tr-9" /><use href="#p3-tr-10" />
+                </g>
+
+                <!-- Layer 1: Circuit Track Brightening Wave -->
+                <g class="track-waves" fill="none" stroke="rgba(0, 240, 255, 0.42)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+                  <use href="#p3-tr-1" class="spark-wave s1" />
+                  <use href="#p3-tr-2" class="spark-wave s2" />
+                  <use href="#p3-tr-3" class="spark-wave s3" />
+                  <use href="#p3-tr-4" class="spark-wave s4" />
+                  <use href="#p3-tr-5" class="spark-wave s5-rev" />
+                  <use href="#p3-tr-6" class="spark-wave s6" />
+                  <use href="#p3-tr-7" class="spark-wave s7" />
+                  <use href="#p3-tr-8" class="spark-wave s8" />
+                  <use href="#p3-tr-9" class="spark-wave s9" />
+                  <use href="#p3-tr-10" class="spark-wave s10-rev" />
+                </g>
+
+                <!-- Layer 2: Glowing Light Trail -->
+                <g class="spark-trails" fill="none" stroke="#00e5ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" filter="url(#sparkGlow3)">
+                  <use href="#p3-tr-1" class="spark-trail s1" />
+                  <use href="#p3-tr-2" class="spark-trail s2" />
+                  <use href="#p3-tr-3" class="spark-trail s3" />
+                  <use href="#p3-tr-4" class="spark-trail s4" />
+                  <use href="#p3-tr-5" class="spark-trail s5-rev" />
+                  <use href="#p3-tr-6" class="spark-trail s6" />
+                  <use href="#p3-tr-7" class="spark-trail s7" />
+                  <use href="#p3-tr-8" class="spark-trail s8" />
+                  <use href="#p3-tr-9" class="spark-trail s9" />
+                  <use href="#p3-tr-10" class="spark-trail s10-rev" />
+                </g>
+
+                <!-- Layer 3: Concentrated White Spark Core Head -->
+                <g class="spark-heads" fill="none" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                  <use href="#p3-tr-1" class="spark-head s1" />
+                  <use href="#p3-tr-2" class="spark-head s2" />
+                  <use href="#p3-tr-3" class="spark-head s3" />
+                  <use href="#p3-tr-4" class="spark-head s4" />
+                  <use href="#p3-tr-5" class="spark-head s5-rev" />
+                  <use href="#p3-tr-6" class="spark-head s6" />
+                  <use href="#p3-tr-7" class="spark-head s7" />
+                  <use href="#p3-tr-8" class="spark-head s8" />
+                  <use href="#p3-tr-9" class="spark-head s9" />
+                  <use href="#p3-tr-10" class="spark-head s10-rev" />
+                </g>
+
+                <!-- Occasional Junction Sparks for PCB 3 -->
+                <g class="junction-sparks" filter="url(#junctionFlash3)">
+                  <g class="junction-spark js-1" transform="translate(480, 25)">
+                    <circle r="2.2" fill="#ffffff" />
+                    <polygon points="0,-4 1,-1 4,0 1,1 0,4 -1,1 -4,0 -1,-1" fill="#00f0ff" />
+                  </g>
+                  <g class="junction-spark js-2" transform="translate(700, 20)">
+                    <circle r="2.2" fill="#ffffff" />
+                    <polygon points="0,-4 1,-1 4,0 1,1 0,4 -1,1 -4,0 -1,-1" fill="#00f0ff" />
+                  </g>
+                  <g class="junction-spark js-3" transform="translate(770, 170)">
+                    <circle r="2.5" fill="#ffffff" />
+                    <polygon points="0,-4.5 1,-1 4.5,0 1,1 0,4.5 -1,1 -4.5,0 -1,-1" fill="#00f0ff" />
+                  </g>
+                  <g class="junction-spark js-4" transform="translate(480, 410)">
+                    <circle r="2.2" fill="#ffffff" />
+                    <polygon points="0,-4 1,-1 4,0 1,1 0,4 -1,1 -4,0 -1,-1" fill="#00f0ff" />
+                  </g>
+                  <g class="junction-spark js-5" transform="translate(710, 410)">
+                    <circle r="2.2" fill="#ffffff" />
+                    <polygon points="0,-4 1,-1 4,0 1,1 0,4 -1,1 -4,0 -1,-1" fill="#00f0ff" />
+                  </g>
+                  <g class="junction-spark js-6" transform="translate(320, 470)">
+                    <circle r="2.2" fill="#ffffff" />
+                    <polygon points="0,-4 1,-1 4,0 1,1 0,4 -1,1 -4,0 -1,-1" fill="#00f0ff" />
+                  </g>
+                </g>
+              </svg>
             </div>
           </div>
 
-          <div class="pcb-thumbnails-row">
-
-            <button class="pcb-thumbnail active"
-                    data-image="./pcb-1.jpg"
-                    aria-label="Show first PCB design">
-              <img src="./pcb-1.jpg" alt="PCB design one">
+          <!-- Horizontal Row of Three Small Image Thumbnails Below Featured Image (No text labels or names displayed) -->
+          <div class="pcb-thumbnails-row" role="tablist" aria-label="PCB Circuit Gallery Thumbnails">
+            <button class="pcb-thumbnail active" role="tab" aria-selected="true" data-image="assets/pcb-1.jpg" data-overlay="overlay-pcb-1" aria-label="View first PCB circuit design">
+              <div class="thumb-media">
+                <img src="assets/pcb-1.jpg" alt="Circuit board design preview" class="thumb-img" loading="eager">
+              </div>
             </button>
 
-            <button class="pcb-thumbnail"
-                    data-image="./pcb-2.jpg"
-                    aria-label="Show second PCB design">
-              <img src="./pcb-2.jpg" alt="PCB design two">
+            <button class="pcb-thumbnail" role="tab" aria-selected="false" data-image="assets/pcb-2.jpg" data-overlay="overlay-pcb-2" aria-label="View second PCB circuit design">
+              <div class="thumb-media">
+                <img src="assets/pcb-2.jpg" alt="Circuit board design preview" class="thumb-img" loading="eager">
+              </div>
             </button>
 
-            <button class="pcb-thumbnail"
-                    data-image="./pcb-3.jpg"
-                    aria-label="Show third PCB design">
-              <img src="./pcb-3.jpg" alt="PCB design three">
+            <button class="pcb-thumbnail" role="tab" aria-selected="false" data-image="assets/pcb-3.jpg" data-overlay="overlay-pcb-3" aria-label="View third PCB circuit design">
+              <div class="thumb-media">
+                <img src="assets/pcb-3.jpg" alt="Circuit board design preview" class="thumb-img" loading="eager">
+              </div>
             </button>
-
           </div>
         </div>
-
-      </section>
-
+      </div>
     </div>
   </main>
 
-  <script>
-    const featuredImage = document.getElementById("featuredPcbImage");
-    const thumbnails = document.querySelectorAll(".pcb-thumbnail");
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-container">
+      <p class="footer-copy">&copy; 2026 OPCODE. All Rights Reserved.</p>
+    </div>
+  </footer>
 
-    thumbnails.forEach((thumbnail) => {
-      thumbnail.addEventListener("click", () => {
-        const imagePath = thumbnail.dataset.image;
-
-        featuredImage.style.opacity = "0";
-
-        setTimeout(() => {
-          featuredImage.src = imagePath;
-          featuredImage.style.opacity = "1";
-        }, 180);
-
-        thumbnails.forEach((item) => item.classList.remove("active"));
-        thumbnail.classList.add("active");
-      });
-    });
-
-    const menuButton = document.getElementById("menuButton");
-    const navList = document.getElementById("navList");
-
-    menuButton.addEventListener("click", () => {
-      const isOpen = navList.classList.toggle("open");
-      menuButton.setAttribute("aria-expanded", String(isOpen));
-    });
-
-    navList.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        navList.classList.remove("open");
-        menuButton.setAttribute("aria-expanded", "false");
-      });
-    });
-  </script>
-
+  <!-- JavaScript -->
+  <script src="script.js"></script>
 </body>
 </html>

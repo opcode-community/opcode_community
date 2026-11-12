@@ -4,28 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us – OPCODE | Open Platform Community of Design Engineers</title>
-  <meta name="description" content="Learn about OPCODE – our mission, vision, objective, and the founders behind this engineering community.">
+  <meta name="description" content="OPCODE is a learning-focused engineering community dedicated to PCB design and electronics engineering. Learn about our objective, vision, mission, and founders.">
 
-  <!-- Inter Font -->
+  <!-- Google Fonts: Manrope (Headings) & Inter (Body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Shared Stylesheet -->
+  <!-- Shared Theme Stylesheet (Black & Deep Navy theme matching Home page) -->
   <link rel="stylesheet" href="styles.css">
-  <!-- About Page Styles -->
+  <!-- About Us Dedicated Stylesheet -->
   <link rel="stylesheet" href="about.css">
 </head>
-<body>
+<body class="about-page">
 
   <!-- ============================================================
-       HEADER – Identical to homepage
+       HEADER – Identical to Home page header structure & sizing
        ============================================================ -->
   <header class="site-header" id="header">
     <div class="header-container">
-      <!-- Logo links back to homepage -->
+      <!-- Brand Logo (Same path as Home page with automatic fallback) -->
       <a href="index.html" class="logo-link" aria-label="OPCODE Homepage">
-        <img src="assets/opcode-logo-new.png" alt="OPCODE – Open Platform Community of Design Engineers" class="header-logo" width="2172" height="724">
+        <img src="assets/opcode-logo-new.png" 
+             alt="OPCODE – Open Platform Community of Design Engineers" 
+             class="header-logo" 
+             width="2172" 
+             height="724"
+             loading="eager"
+             onerror="if(!this.dataset.retry){this.dataset.retry='1';this.src='opcode-logo-new.png';}else if(this.dataset.retry==='1'){this.dataset.retry='2';this.src='assests/opcode-logo-new.png';}">
       </a>
 
       <!-- Desktop Navigation -->
@@ -33,9 +39,9 @@
         <ul class="nav-list">
           <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
           <li class="nav-item"><a href="about.html" class="nav-link active">About Us</a></li>
-          <li class="nav-item"><a href="#course" class="nav-link">Course</a></li>
-          <li class="nav-item"><a href="#core-team" class="nav-link">Core Team</a></li>
-          <li class="nav-item"><a href="#contact-us" class="nav-link">Contact Us</a></li>
+          <li class="nav-item"><a href="index.html#course" class="nav-link">Course</a></li>
+          <li class="nav-item"><a href="index.html#core-team" class="nav-link">Core Team</a></li>
+          <li class="nav-item"><a href="index.html#contact-us" class="nav-link">Contact Us</a></li>
         </ul>
       </nav>
 
@@ -52,101 +58,140 @@
       <ul class="mobile-nav-list">
         <li><a href="index.html" class="mobile-nav-link">Home</a></li>
         <li><a href="about.html" class="mobile-nav-link active">About Us</a></li>
-        <li><a href="#course" class="mobile-nav-link">Course</a></li>
-        <li><a href="#core-team" class="mobile-nav-link">Core Team</a></li>
-        <li><a href="#contact-us" class="mobile-nav-link">Contact Us</a></li>
+        <li><a href="index.html#course" class="mobile-nav-link">Course</a></li>
+        <li><a href="index.html#core-team" class="mobile-nav-link">Core Team</a></li>
+        <li><a href="index.html#contact-us" class="mobile-nav-link">Contact Us</a></li>
       </ul>
     </nav>
   </header>
 
   <!-- ============================================================
-       MAIN CONTENT
+       MAIN CONTENT: About Us Page Sections
        ============================================================ -->
-  <main class="about-main">
+  <main class="about-main" id="about-content">
 
     <!-- --------------------------------------------------------
-         PAGE HERO – Page title band
+         1. About Us Hero Section
          -------------------------------------------------------- -->
-    <section class="about-hero" aria-label="About OPCODE">
-      <div class="about-container">
-        <span class="section-eyebrow">Who We Are</span>
-        <h1 class="about-page-title">About <span class="cyan-accent">OPCODE</span></h1>
-        <p class="about-intro-text">
-          OPCODE – Open Platform Community of Design Engineers is an engineering community founded
-          with a vision to bridge the gap between education and industry by connecting students,
-          aspiring engineers, experienced professionals, and industry experts.
-        </p>
-        <p class="about-intro-text">
-          We believe that engineering growth goes beyond textbooks and classrooms. It comes from
-          sharing knowledge, gaining practical experience, collaborating with others, and learning
-          from real-world challenges.
+    <section class="about-hero" aria-labelledby="about-hero-title">
+      <div class="about-container about-hero-container">
+        <div class="circuit-pill">
+          <span class="circuit-dot"></span>
+          <span class="circuit-tag-text">Engineering Knowledge &amp; Innovation</span>
+        </div>
+        <h1 class="about-hero-title" id="about-hero-title">
+          About <span class="cyan-accent">OPCODE</span>
+        </h1>
+        <p class="about-hero-desc">
+          Building knowledge, developing practical skills, and inspiring innovation in PCB design and electronics engineering.
         </p>
       </div>
     </section>
 
     <!-- --------------------------------------------------------
-         OVM CARDS – Objective · Vision · Mission
+         2. Introduction Section: Who We Are
          -------------------------------------------------------- -->
-    <section class="ovm-section" aria-label="Our Objective, Vision and Mission">
+    <section class="about-section intro-section" aria-labelledby="intro-heading">
       <div class="about-container">
-        <div class="ovm-grid">
+        <div class="intro-card">
+          <div class="section-badge">
+            <span class="badge-line"></span>
+            <span class="badge-text">COMMUNITY OVERVIEW</span>
+          </div>
+          <h2 class="section-heading" id="intro-heading">Who We Are</h2>
+          <div class="section-subheading">Engineering Ideas Into Reality</div>
+          <div class="content-divider" aria-hidden="true"></div>
+          <p class="justified-paragraph">
+            OPCODE is a learning-focused engineering community dedicated to PCB design and electronics. Our aim is to make technical learning clear, practical, and accessible to learners at every stage. We encourage students to understand concepts from the fundamentals, explore design tools, and develop the confidence to apply their knowledge in real-world projects. Through structured learning and practical guidance, OPCODE aims to create an environment where curiosity leads to creativity and ideas develop into meaningful engineering solutions.
+          </p>
+        </div>
+      </div>
+    </section>
 
-          <!-- Objective -->
-          <article class="ovm-card">
-            <div class="ovm-icon-wrap" aria-hidden="true">
-              <!-- Target / Crosshair icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
-                <circle cx="12" cy="12" r="10"/>
-                <circle cx="12" cy="12" r="6"/>
-                <circle cx="12" cy="12" r="2"/>
-                <line x1="12" y1="2" x2="12" y2="4"/>
-                <line x1="12" y1="20" x2="12" y2="22"/>
-                <line x1="2" y1="12" x2="4" y2="12"/>
-                <line x1="20" y1="12" x2="22" y2="12"/>
+    <!-- --------------------------------------------------------
+         3. Objective Section: Our Objective
+         -------------------------------------------------------- -->
+    <section class="about-section objective-section" aria-labelledby="objective-heading">
+      <div class="about-container">
+        <div class="objective-card">
+          <div class="card-header-row">
+            <div class="card-icon-wrap" aria-hidden="true">
+              <!-- Electronics IC / Microcontroller Icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="card-icon">
+                <rect x="5" y="5" width="14" height="14" rx="2" ry="2"/>
+                <line x1="9" y1="9" x2="15" y2="9"/>
+                <line x1="9" y1="12" x2="15" y2="12"/>
+                <line x1="9" y1="15" x2="15" y2="15"/>
+                <line x1="1" y1="9" x2="5" y2="9"/>
+                <line x1="1" y1="12" x2="5" y2="12"/>
+                <line x1="1" y1="15" x2="5" y2="15"/>
+                <line x1="19" y1="9" x2="23" y2="9"/>
+                <line x1="19" y1="12" x2="23" y2="12"/>
+                <line x1="19" y1="15" x2="23" y2="15"/>
+                <line x1="9" y1="1" x2="9" y2="5"/>
+                <line x1="12" y1="1" x2="12" y2="5"/>
+                <line x1="15" y1="1" x2="15" y2="5"/>
+                <line x1="9" y1="19" x2="9" y2="23"/>
+                <line x1="12" y1="19" x2="12" y2="23"/>
+                <line x1="15" y1="19" x2="15" y2="23"/>
               </svg>
             </div>
-            <h2 class="ovm-heading">Our Objective</h2>
-            <p class="ovm-body">
-              To create an open and inclusive engineering platform where students and professionals
-              can share knowledge, explore new technologies, gain practical experience, participate
-              in technical workshops, collaborate on projects, and grow together through continuous
-              learning and innovation.
+            <div>
+              <div class="card-kicker">STRATEGIC GOALS</div>
+              <h2 class="card-heading" id="objective-heading">Our Objective</h2>
+            </div>
+          </div>
+          <p class="justified-paragraph">
+            Our objective is to provide clear and structured learning in PCB design and electronics engineering, starting from the fundamentals and progressing towards practical implementation. We aim to help learners understand electronic components, circuit design principles, schematic creation, PCB layout, and design workflows. By combining theoretical knowledge with hands-on experience, OPCODE strives to develop technical skills, problem-solving abilities, and confidence among aspiring engineers.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- --------------------------------------------------------
+         4 & 5. Vision & Mission Section
+         -------------------------------------------------------- -->
+    <section class="about-section vm-section" aria-label="Our Vision and Mission">
+      <div class="about-container">
+        <div class="vm-grid">
+
+          <!-- Vision Card -->
+          <article class="vm-card" aria-labelledby="vision-heading">
+            <div class="card-header-row">
+              <div class="card-icon-wrap" aria-hidden="true">
+                <!-- High-tech Scope / Vision Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="card-icon">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                </svg>
+              </div>
+              <div>
+                <div class="card-kicker">FORWARD OUTLOOK</div>
+                <h2 class="card-heading" id="vision-heading">Our Vision</h2>
+              </div>
+            </div>
+            <p class="justified-paragraph">
+              To become a supportive and innovative learning community that inspires students and aspiring engineers to explore PCB design, electronics, and emerging technologies. We envision a space where learners gain strong technical foundations, develop creative thinking, and transform their ideas into practical engineering solutions.
             </p>
           </article>
 
-          <!-- Vision -->
-          <article class="ovm-card">
-            <div class="ovm-icon-wrap" aria-hidden="true">
-              <!-- Eye / Vision icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                <circle cx="12" cy="12" r="3"/>
-              </svg>
+          <!-- Mission Card -->
+          <article class="vm-card" aria-labelledby="mission-heading">
+            <div class="card-header-row">
+              <div class="card-icon-wrap" aria-hidden="true">
+                <!-- Electronics Signal Circuit Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="card-icon">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+              </div>
+              <div>
+                <div class="card-kicker">CORE PURPOSE</div>
+                <h2 class="card-heading" id="mission-heading">Our Mission</h2>
+              </div>
             </div>
-            <h2 class="ovm-heading">Our Vision</h2>
-            <p class="ovm-body">
-              To build a strong and collaborative engineering community that bridges the gap between
-              academic education and industry, inspiring individuals to become skilled engineers,
-              creative thinkers, and innovators.
-            </p>
-          </article>
-
-          <!-- Mission -->
-          <article class="ovm-card">
-            <div class="ovm-icon-wrap" aria-hidden="true">
-              <!-- Rocket / Mission icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
-                <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
-                <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
-                <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
-                <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
-              </svg>
-            </div>
-            <h2 class="ovm-heading">Our Mission</h2>
-            <p class="ovm-body">
-              To provide an environment where aspiring engineers can learn new technologies,
-              participate in technical workshops, exchange knowledge, collaborate on real-world
-              projects, and develop practical engineering skills.
+            <p class="justified-paragraph">
+              Our mission is to simplify technical concepts through step-by-step guidance, practical demonstrations, and continuous learning. We aim to introduce learners to industry-relevant design tools, encourage hands-on projects, and promote knowledge sharing. By creating an engaging learning environment, OPCODE strives to support every learner in building the skills needed for their engineering journey.
             </p>
           </article>
 
@@ -155,50 +200,55 @@
     </section>
 
     <!-- --------------------------------------------------------
-         FOUNDERS SECTION
+         6. Founders Section: Our Founders
+         Two cards side by side (Mukilan left, Pavithra right)
          -------------------------------------------------------- -->
-    <section class="founders-section" aria-label="Our Founders">
+    <section class="about-section founders-section" aria-labelledby="founders-heading">
       <div class="about-container">
-        <div class="section-label-row">
-          <span class="section-eyebrow">The People Behind OPCODE</span>
-          <h2 class="section-title">Our <span class="cyan-accent">Founders</span></h2>
+        <div class="founders-header-wrap">
+          <div class="section-badge">
+            <span class="badge-line"></span>
+            <span class="badge-text">LEADERSHIP</span>
+          </div>
+          <h2 class="section-heading founders-main-heading" id="founders-heading">
+            Our <span class="cyan-accent">Founders</span>
+          </h2>
         </div>
 
         <div class="founders-grid">
-
-          <!-- Founder 1 -->
-          <article class="founder-card">
-            <div class="founder-avatar" aria-hidden="true">
-              <span class="founder-initials">M</span>
-              <!-- Subtle circuit ring decoration -->
-              <div class="avatar-ring"></div>
+          <!-- LEFT CARD: Mukilan -->
+          <article class="founder-card" aria-label="Mukilan - Founder &amp; Community Lead">
+            <div class="founder-badge" aria-hidden="true">
+              <span class="founder-initial">M</span>
             </div>
-            <div class="founder-info">
-              <h3 class="founder-name">Mukilan</h3>
-              <span class="founder-role">Founder &amp; Community Lead</span>
-            </div>
+            <h3 class="founder-name">Mukilan</h3>
+            <p class="founder-role">Founder &amp; Community Lead</p>
           </article>
 
-          <!-- Founder 2 -->
-          <article class="founder-card">
-            <div class="founder-avatar" aria-hidden="true">
-              <span class="founder-initials">P</span>
-              <div class="avatar-ring"></div>
+          <!-- RIGHT CARD: Pavithra -->
+          <article class="founder-card" aria-label="Pavithra - Founder &amp; Community Lead">
+            <div class="founder-badge" aria-hidden="true">
+              <span class="founder-initial">P</span>
             </div>
-            <div class="founder-info">
-              <h3 class="founder-name">Pavithra</h3>
-              <span class="founder-role">Founder &amp; Community Lead</span>
-            </div>
+            <h3 class="founder-name">Pavithra</h3>
+            <p class="founder-role">Founder &amp; Community Lead</p>
           </article>
-
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- JavaScript (shared – handles mobile nav) -->
+  <!-- ============================================================
+       FOOTER – Matching Home page deep black theme
+       ============================================================ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-container">
+      <p class="footer-copy">&copy; 2026 OPCODE. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript: Shared controller handling mobile nav, active links, and scroll -->
   <script src="script.js"></script>
 </body>
 </html>
-
